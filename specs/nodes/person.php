@@ -1,9 +1,10 @@
 <?php
 
-namespace jubianchi\gossip\specs\node;
+namespace jubianchi\gossip\specs\nodes;
 
 use atoum;
-use jubianchi\gossip\node\person as testedClass;
+use jubianchi\gossip\node\collection;
+use jubianchi\gossip\nodes\person as testedClass;
 
 class person extends atoum\spec
 {
@@ -19,26 +20,14 @@ class person extends atoum\spec
         ;
     }
 
-    public function it_should_cast_to_string_as_its_name()
-    {
-        $this
-            ->given(
-                $name = uniqid(),
-                $person = new testedClass($name)
-            )
-            ->then
-                ->castToString($person)->isEqualTo($name)
-        ;
-    }
-
     public function it_should_tell_message_to_friends()
     {
         $this
             ->given(
                 $friend = new testedClass(uniqid()),
                 $otherFriend = new testedClass(uniqid()),
-                $person = new testedClass(uniqid(), array($friend, $otherFriend)),
-                $gossip = new \mock\jubianchi\gossip\message\gossip(uniqid(), $person)
+                $person = new testedClass(uniqid(), (new collection())->add($friend)->add($otherFriend)),
+                $gossip = new \mock\jubianchi\gossip\messages\gossip(uniqid(), $person)
             )
             ->when($person->tell($gossip))
             ->then
@@ -55,8 +44,8 @@ class person extends atoum\spec
                 $friend = new testedClass(uniqid()),
                 $otherFriend = new testedClass(uniqid()),
                 $teller = new testedClass(uniqid()),
-                $gossip = new \mock\jubianchi\gossip\message\gossip(uniqid(), $teller),
-                $person = new testedClass(uniqid(), array($friend, $otherFriend))
+                $gossip = new \mock\jubianchi\gossip\messages\gossip(uniqid(), $teller),
+                $person = new testedClass(uniqid(), (new collection())->add($friend)->add($otherFriend))
             )
             ->when($person->listen($teller, $gossip))
             ->then

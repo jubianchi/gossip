@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-4": {
-            "jubianchi\\gossip\\": "./"
+            "jubianchi\\gossip\\": "src/"
         }
     }
 }

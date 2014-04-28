@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "50b4cee736bd26c5cc88d86425fac51f",
+    "hash": "7eafe1742ec3d5a3ebae042293c01459",
     "packages": [
 
     ],
@@ -91,12 +91,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jubianchi/atoum-bdd-extension.git",
-                "reference": "3e85be4c2a6905b187fca422ba7fadb580cc4556"
+                "reference": "e67c1d784122c3398f11b984e6d7e471429e6892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jubianchi/atoum-bdd-extension/zipball/3e85be4c2a6905b187fca422ba7fadb580cc4556",
-                "reference": "3e85be4c2a6905b187fca422ba7fadb580cc4556",
+                "url": "https://api.github.com/repos/jubianchi/atoum-bdd-extension/zipball/e67c1d784122c3398f11b984e6d7e471429e6892",
+                "reference": "e67c1d784122c3398f11b984e6d7e471429e6892",
                 "shasum": ""
             },
             "require-dev": {
@@ -134,7 +134,7 @@
                 "source": "https://github.com/jubianchi/atoum-bdd-extension/tree/master",
                 "issues": "https://github.com/jubianchi/atoum-bdd-extension/issues"
             },
-            "time": "2014-04-22 15:20:30"
+            "time": "2014-04-22 15:22:03"
         }
     ],
     "aliases": [
