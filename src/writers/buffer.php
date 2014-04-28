@@ -30,6 +30,13 @@ class buffer implements writer, behaviors\writable
 		return $this->reset();
 	}
 
+    public function flush(callable $callback)
+    {
+        $callback($this->buffer);
+
+        return $this->reset();
+    }
+
 	public function reset()
 	{
 		$this->buffer = '';
