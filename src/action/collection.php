@@ -18,6 +18,15 @@ class collection implements behaviors\collection\matchable
 		return $this;
 	}
 
+    public function remove(action $item)
+    {
+        if (false !== ($index = array_search($item, $this->items, true))) {
+            unset($this->items[$index]);
+        }
+
+        return $this;
+    }
+
 	public function first()
 	{
 		return reset($this->items);

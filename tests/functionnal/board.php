@@ -8,6 +8,7 @@ use jubianchi\gossip\action;
 use jubianchi\gossip\actions;
 use jubianchi\gossip\condition;
 use jubianchi\gossip\messages\gossip;
+use jubianchi\gossip\messages\priv;
 use jubianchi\gossip\nodes\person;
 use jubianchi\gossip\writable\decorator;
 use jubianchi\gossip\writable\decorators;
@@ -57,8 +58,21 @@ class board
             )
         ;
 
+        $notice = new decorators\color(decorators\color::PURPLE);
+
         $noticeName = (new decorator\collection())
             ->add(new decorators\color(decorators\color::PURPLE, null, true))
+            ->add(
+                $padding = (new decorator\collection())
+                    ->add($paddingLeft = new decorators\padding(1, ' '))
+                    ->add(new decorators\padding(1, ' ', decorators\padding::RIGHT))
+            )
+        ;
+
+        $leave = new decorators\color(decorators\color::RED);
+
+        $leaveName = (new decorator\collection())
+            ->add(new decorators\color(decorators\color::RED, null, true))
             ->add(
                 $padding = (new decorator\collection())
                     ->add($paddingLeft = new decorators\padding(1, ' '))
@@ -88,28 +102,13 @@ class board
                     ;
                 }
             ),
-            new actions\conditional(
-                '/.+/',
-                function(gossip $gossip, person $from, person $to, person $source) use ($writer, $debugPrompt, $paddingLeft) {
-                    $buffer = new buffer();
-                    $to->writeFriendsTo($buffer);
-
-                    $writer
-                        ->write($debugPrompt->decorate($to))
-                        ->writeString(' My friends:')
-                        ->write($paddingLeft->decorate($buffer))
-                        ->writeString(PHP_EOL)
-                    ;
-                },
-                $this->debug
-            ),
             new action(
                 '/join/',
-                function(gossip $gossip, person $from, person $to, person $source) use ($writer, $debugPrompt, $sendPrompt, $name, $noticeName, $message) {
+                function(gossip $gossip, person $from, person $to, person $source) use ($writer, $debugPrompt, $sendPrompt, $name, $notice, $noticeName, $message) {
                     $writer
                         ->write($sendPrompt->decorate($to))
                         ->write($noticeName->decorate($source))
-                        ->write((new decorators\color(decorators\color::PURPLE))->decorate(new raw('joined')))
+                        ->write($notice->decorate(new raw('joined')))
                         ->writeString(PHP_EOL)
                     ;
 
@@ -128,6 +127,52 @@ class board
 
                     $source->listen($to, $hello);
                 }
+            ),
+            new action(
+                '/part/',
+                function(gossip $gossip, person $from, person $to, person $source) use ($writer, $debugPrompt, $sendPrompt, $name, $notice, $noticeName, $message) {
+                    $to->unlink($source);
+
+                    if ($from === $source) {
+                        $bye = new priv('Bye', $to, $source);
+
+                        $writer
+                            ->write($sendPrompt->decorate($to))
+                            ->writeString(' Sending')
+                            ->write($message->decorate($bye))
+                            ->writeString('to')
+                            ->write($name->decorate($source))
+                            ->writeString(PHP_EOL)
+                        ;
+
+                        $source->listen($to, $bye);
+                    }
+                }
+            ),
+            new action(
+                '/part/',
+                function(gossip $gossip, person $from, person $to, person $source) use ($writer, $debugPrompt, $sendPrompt, $name, $leave, $leaveName, $message) {
+                    $writer
+                        ->write($sendPrompt->decorate($to))
+                        ->write($leaveName->decorate($source))
+                        ->write($leave->decorate(new raw('leaved')))
+                        ->writeString(PHP_EOL);
+                }
+            ),
+            new actions\conditional(
+                '/.+/',
+                function(gossip $gossip, person $from, person $to, person $source) use ($writer, $sendPrompt, $notice, $noticeName) {
+                    $buffer = new buffer();
+                    $to->writeFriendsTo($buffer);
+
+                    $writer
+                        ->write($sendPrompt->decorate($to))
+                        ->write($notice->decorate(new raw(' My friends:')))
+                        ->write($noticeName->decorate($buffer))
+                        ->writeString(PHP_EOL)
+                    ;
+                },
+                $this->debug
             )
         ];
     }
@@ -136,6 +181,15 @@ class board
     {
         foreach ($this->actions as $action) {
             $person->on($action);
+        }
+
+        return $this;
+    }
+
+    public function dettach(person $person)
+    {
+        foreach ($this->actions as $action) {
+            $person->off($action);
         }
 
         return $this;

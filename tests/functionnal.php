@@ -132,4 +132,6 @@ $room = new functionnal\room($john);
 
 $room->enter($david);
 $room->enter($rasmus);
+$room->leave($john);
 $room->enter($jubianchi);
+$room->leave($rasmus);

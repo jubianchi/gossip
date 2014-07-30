@@ -28,4 +28,14 @@ class room
 
         return $this;
     }
+
+    public function leave(person $person)
+    {
+        $this->persons->remove($person);
+        $this->board->dettach($person);
+
+        (new gossip('part', $person))->tell($this->persons->last());
+
+        return $this;
+    }
 } 

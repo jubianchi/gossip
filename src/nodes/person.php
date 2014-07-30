@@ -42,6 +42,13 @@ class person implements node, behaviors\writable
         return $this;
     }
 
+    public function unlink(node $from)
+    {
+        $this->friends->ifFound($from, function(node $item) { $this->friends->remove($item); });
+
+        return $this;
+    }
+
     public function tell(message $gossip)
     {
 		$this->friends->walk(function(node $friend) use ($gossip) { $gossip->tell($friend, $this); });
@@ -64,6 +71,13 @@ class person implements node, behaviors\writable
     public function on(action $action)
     {
         $this->actions->add($action);
+
+        return $this;
+    }
+
+    public function off(action $action)
+    {
+        $this->actions->remove($action);
 
         return $this;
     }

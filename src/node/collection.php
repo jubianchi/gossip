@@ -18,6 +18,15 @@ class collection implements behaviors\writable, behaviors\searchable
 		return $this;
 	}
 
+    public function remove(node $item)
+    {
+        if (false !== ($index = array_search($item, $this->items, true))) {
+            unset($this->items[$index]);
+        }
+
+        return $this;
+    }
+
 	public function first()
 	{
 		return reset($this->items);
@@ -71,4 +80,4 @@ class collection implements behaviors\writable, behaviors\searchable
 
 		return $this;
 	}
-} 
+}
