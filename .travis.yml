@@ -15,7 +15,7 @@ matrix:
     - php: hhvm-nightly
 
 before_script:
-  - sudo composer self-update
+  - sudo $(which composer) self-update
   - composer install
 
 script:
