@@ -9,6 +9,9 @@
             "url": "https://github.com/jubianchi/atoum-bdd-extension"
         }
     ],
+    "require": {
+        "php": "~5.4"
+    },
     "require-dev": {
         "atoum/atoum": "dev-extension",
         "atoum/bdd-extension": "dev-master"

@@ -1,25 +1,24 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
     ],
-    "hash": "7eafe1742ec3d5a3ebae042293c01459",
-    "packages": [
-
-    ],
+    "hash": "e7577e0717c4afd4a2819c9f9057e438",
+    "packages": [],
     "packages-dev": [
         {
             "name": "atoum/atoum",
             "version": "dev-extension",
             "source": {
                 "type": "git",
-                "url": "https://github.com/jubianchi/atoum.git",
-                "reference": "a2ce95319bad1011b2ee4ad3aba4065d178e9994"
+                "url": "https://github.com/atoum/atoum.git",
+                "reference": "59fc5d7b8fc4f4988deb60b4c156c6a630013bbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jubianchi/atoum/zipball/a2ce95319bad1011b2ee4ad3aba4065d178e9994",
-                "reference": "a2ce95319bad1011b2ee4ad3aba4065d178e9994",
+                "url": "https://api.github.com/repos/atoum/atoum/zipball/59fc5d7b8fc4f4988deb60b4c156c6a630013bbe",
+                "reference": "59fc5d7b8fc4f4988deb60b4c156c6a630013bbe",
                 "shasum": ""
             },
             "require": {
@@ -45,6 +44,7 @@
                     "classes/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD"
             ],
@@ -79,11 +79,7 @@
                 "test",
                 "unit testing"
             ],
-            "support": {
-                "source": "https://github.com/jubianchi/atoum/tree/extension",
-                "issues": "https://github.com/jubianchi/atoum/issues"
-            },
-            "time": "2014-03-24 15:42:18"
+            "time": "2014-06-08 21:19:38"
         },
         {
             "name": "atoum/bdd-extension",
@@ -91,12 +87,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jubianchi/atoum-bdd-extension.git",
-                "reference": "e67c1d784122c3398f11b984e6d7e471429e6892"
+                "reference": "03942145fecdc49924cc80eb12f35a4bd5579e35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jubianchi/atoum-bdd-extension/zipball/e67c1d784122c3398f11b984e6d7e471429e6892",
-                "reference": "e67c1d784122c3398f11b984e6d7e471429e6892",
+                "url": "https://api.github.com/repos/jubianchi/atoum-bdd-extension/zipball/03942145fecdc49924cc80eb12f35a4bd5579e35",
+                "reference": "03942145fecdc49924cc80eb12f35a4bd5579e35",
                 "shasum": ""
             },
             "require-dev": {
@@ -134,21 +130,18 @@
                 "source": "https://github.com/jubianchi/atoum-bdd-extension/tree/master",
                 "issues": "https://github.com/jubianchi/atoum-bdd-extension/issues"
             },
-            "time": "2014-04-22 15:22:03"
+            "time": "2014-06-09 20:19:28"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "atoum/atoum": 20,
         "atoum/bdd-extension": 20
     },
-    "platform": [
-
-    ],
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "platform": {
+        "php": "~5.4"
+    },
+    "platform-dev": []
 }
