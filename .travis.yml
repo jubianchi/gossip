@@ -20,4 +20,4 @@ script:
   - vendor/bin/atoum -d specs
   - echo
   - echo
-  - php tests/functionnal.php
+  - php tests/functionnal.php --debug
